@@ -60,6 +60,15 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hudl.FFmpeg">
+      <HintPath>..\Dlls\Hudl.FFmpeg.dll</HintPath>
+    </Reference>
+    <Reference Include="Hudl.FFmpeg.Core">
+      <HintPath>..\Dlls\Hudl.FFmpeg.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hudl.FFprobe">
+      <HintPath>..\Dlls\Hudl.FFprobe.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -138,25 +147,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\WorkSpace\Git\Source\Repos\HudlFfmpeg\Hudl.FFmpeg.Core\Hudl.FFmpeg.Core.csproj">
-      <Project>{fa5d683b-0eea-4086-b71d-88a8360ae8f0}</Project>
-      <Name>Hudl.FFmpeg.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\WorkSpace\Git\Source\Repos\HudlFfmpeg\Hudl.Ffmpeg\Hudl.Ffmpeg.csproj">
-      <Project>{a28fa3ff-8d08-4129-987b-f58aae613a72}</Project>
-      <Name>Hudl.Ffmpeg</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\WorkSpace\Git\Source\Repos\HudlFfmpeg\Hudl.FFprobe\Hudl.FFprobe.csproj">
-      <Project>{711728b7-0f13-4ed8-a6cd-7a05657c0a0d}</Project>
-      <Name>Hudl.FFprobe</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\..\WorkSpace\Git\Source\Repos\WpfInfrastructure\WpfInfrastructure\WpfInfrastructure.csproj">
+    <Folder Include="Assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WpfInfrastructure\WpfInfrastructure\WpfInfrastructure.csproj">
       <Project>{9dc555f2-73fb-4298-8a59-cfd10b6f9240}</Project>
       <Name>WpfInfrastructure</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,4 +5,5 @@
 /GifCreator/bin
 /GifCreator/obj
 /packages
-*.suo
+/.vs/GifCreator/v14
+*.user
