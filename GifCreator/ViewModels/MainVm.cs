@@ -13,6 +13,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
+using WpfInfras.Helper;
 using WpfInfras.ViewModels;
 
 namespace GifCreator.ViewModels
@@ -20,7 +21,6 @@ namespace GifCreator.ViewModels
     public class MainVm:BaseVm
     {
         private string _videoSource;
-        private Bitmap _outputBitmap;
 
 
         const string outputPath = "temp";
@@ -50,6 +50,7 @@ namespace GifCreator.ViewModels
 
         private void Convert2Gif()
         {
+
             var dir = AppDomain.CurrentDomain.BaseDirectory;
 
             var inputSettings = SettingsCollection.ForInput(new StartAt(1d));
@@ -58,24 +59,15 @@ namespace GifCreator.ViewModels
                 new DurationOutput(5d));
 
             var settings = SettingsCollection.ForOutput(new OverwriteOutput());
-            
+
 
             var factory = CommandFactory.Create();
 
-            factory
-                .CreateOutputCommand()
+            factory.CreateOutputCommand()
                 .WithInput<VideoStream>(VideoSource)
-                 .MapTo<Gif>("d:/out.gif", settings);
+                .MapTo<Gif>("d:/out.gif", settings);
 
             factory.Render();
-        }
-
-
-   
-        public Bitmap OutputBitmap
-        {
-            get { return _outputBitmap; }
-            set { SetProperty(ref _outputBitmap, value,()=> OutputBitmap); }
         }
     }
 }

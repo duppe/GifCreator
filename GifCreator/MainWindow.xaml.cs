@@ -1,10 +1,13 @@
 ﻿using GifCreator.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,6 +18,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfInfras.Enums;
+using WpfInfras.Helper;
 using WpfInfras.PInvoke;
 
 namespace GifCreator
@@ -30,6 +35,9 @@ namespace GifCreator
             InitializeComponent();
             _vm = (MainVm)DataContext;
             mePlayer.MediaEnded += MePlayer_MediaEnded;
+
+            ba.Content = SymbolHelper.SegoeUiSymbol(Symbol.Accept);
+         
         }
 
         private void MePlayer_MediaEnded(object sender, RoutedEventArgs e)
