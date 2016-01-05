@@ -14,11 +14,11 @@ using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using WpfInfras.Helper;
-using WpfInfras.ViewModels;
+using WpfInfras.Presentation;
 
 namespace GifCreator.ViewModels
 {
-    public class MainVm:BaseVm
+    public class MainVm:NotifyPropertyChanged
     {
         private string _videoSource;
 

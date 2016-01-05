@@ -17,8 +17,10 @@
         </Grid.RowDefinitions>
         <MediaElement Source="{Binding VideoSource}" LoadedBehavior="Manual" x:Name="mePlayer"  />
         <StackPanel Grid.Row="1" Height="30" VerticalAlignment="Bottom" Orientation="Horizontal">
-            <Button Margin="10,0">打开</Button>
-            <Button  x:Name="ba"  Margin="10,0" Content="" FontFamily="Segoe UI Symbol"></Button>
+            <Button Margin="10,0" Click="Button_Click">打开</Button>
+            <Button  Margin="10,0" Content="生成" FontFamily="Segoe UI Symbol"></Button>
+            <controls:ModernButton>abc</controls:ModernButton>
+            <controls:ModernProgressRing IsActive="True"></controls:ModernProgressRing>
         </StackPanel>
     </Grid>
 </controls:BlankWindow>
