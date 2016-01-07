@@ -1,24 +1,17 @@
 ﻿using Hudl.FFmpeg;
 using Hudl.FFmpeg.Command;
-using Hudl.FFmpeg.Filters;
-using Hudl.FFmpeg.Filters.BaseTypes;
-using Hudl.FFmpeg.Metadata;
 using Hudl.FFmpeg.Resources;
 using Hudl.FFmpeg.Resources.BaseTypes;
 using Hudl.FFmpeg.Settings;
 using Hudl.FFmpeg.Settings.BaseTypes;
 using Hudl.FFmpeg.Sugar;
 using System;
-using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Windows.Input;
-using WpfInfras.Helper;
 using WpfInfras.Presentation;
 
 namespace GifCreator.ViewModels
 {
-    public class MainVm:NotifyPropertyChanged
+    public class MainVm : NotifyPropertyChanged
     {
         private string _videoSource;
 
@@ -29,24 +22,24 @@ namespace GifCreator.ViewModels
 
         public MainVm()
         {
-            VideoSource = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "avPZqwd_460sv.mp4");
+            //VideoSource = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "avPZqwd_460sv.mp4");
 
             ResourceManagement.CommandConfiguration = CommandConfiguration.Create(outputPath, ffmpegPath, ffprobePath);
 
             ConvertCommand = new RelayCommand(Convert2Gif, () => !string.IsNullOrEmpty(VideoSource));
         }
 
-     
+
         public string VideoSource
         {
             get { return _videoSource; }
             set
             {
-                SetProperty(ref _videoSource, value,()=> VideoSource);
+                SetProperty(ref _videoSource, value, () => VideoSource);
             }
         }
 
-        public ICommand  ConvertCommand { get; set; }
+        public ICommand ConvertCommand { get; set; }
 
         private void Convert2Gif()
         {
