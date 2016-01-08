@@ -69,6 +69,12 @@
     <Reference Include="Hudl.FFprobe">
       <HintPath>..\Dlls\Hudl.FFprobe.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\HudlFfmpeg\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\HudlFfmpeg\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />

@@ -8,21 +8,18 @@
         mc:Ignorable="d" 
         Loaded="Window_Loaded"
         DataContext="{Binding MainVm,Source={StaticResource Locator}}"
+        WindowStartupLocation="CenterScreen"
         xmlns:wpfinfrasenum="clr-namespace:WpfInfras.Enums;assembly=WpfInfrastructure"
-        Title="Gif生成器" Height="200" Width="450">
+        Title="Gif生成器" Height="320" Width="450">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <MediaElement Source="{Binding VideoSource}" LoadedBehavior="Manual" x:Name="mePlayer"  />
-        <StackPanel Grid.Row="1" Height="30" Margin="0,10" VerticalAlignment="Bottom" Orientation="Horizontal">
-            <Button Margin="10,0"   Click="Button_Click">打开</Button>
-            <Button  Margin="10,0" Content="生成" FontFamily="Segoe UI Symbol" Width="57"></Button>
-            <controls:ModernButton  IconData=""></controls:ModernButton>
-
-            <!--<controls:SymbolIcon Symbol="Bold" Foreground="Black" Width="25"/>-->
-            <controls:SymbolButton Symbol="Bold" Foreground="Black" Width="25"/>
+        <StackPanel Grid.Row="1" Height="30" Margin="0,10" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+            <controls:SymbolButton x:Name="OpenMp4"   Symbol="OpenFile"  Margin="10,0" Foreground="Black"  Content="打开视频文件" Command="{Binding OpenMp4Command}" />
+            <controls:SymbolButton x:Name="OutputGif" Symbol="SaveLocal" Margin="10,0" Foreground="Black"  Content="生成Gif"     Command="{Binding ConvertCommand}"  />
         </StackPanel>
     </Grid>
 </controls:BlankWindow>

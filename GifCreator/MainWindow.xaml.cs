@@ -1,7 +1,6 @@
 ﻿using GifCreator.ViewModels;
 using System;
 using System.Windows;
-using System.Windows.Input;
 using WpfInfras.PInvoke;
 
 namespace GifCreator
@@ -47,21 +46,6 @@ namespace GifCreator
             }
         }
 
-        private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
 
-            dialog.Filter = "mp4|*.mp4|flv|*.flv";
-            if (dialog.ShowDialog(this) == true)
-            {
-                _vm.VideoSource = dialog.FileName;
-                mePlayer.Play();
-            }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

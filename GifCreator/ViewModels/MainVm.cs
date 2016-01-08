@@ -6,7 +6,9 @@ using Hudl.FFmpeg.Settings;
 using Hudl.FFmpeg.Settings.BaseTypes;
 using Hudl.FFmpeg.Sugar;
 using System;
+using System.IO;
 using System.Windows.Input;
+using WpfInfras.Controls;
 using WpfInfras.Presentation;
 
 namespace GifCreator.ViewModels
@@ -26,7 +28,8 @@ namespace GifCreator.ViewModels
 
             ResourceManagement.CommandConfiguration = CommandConfiguration.Create(outputPath, ffmpegPath, ffprobePath);
 
-            ConvertCommand = new RelayCommand(Convert2Gif, () => !string.IsNullOrEmpty(VideoSource));
+            ConvertCommand = new RelayCommand(Convert2Gif);
+            OpenMp4Command = new RelayCommand(OpenMp4);
         }
 
 
@@ -41,9 +44,10 @@ namespace GifCreator.ViewModels
 
         public ICommand ConvertCommand { get; set; }
 
+        public ICommand OpenMp4Command { get; set; }
+
         private void Convert2Gif()
         {
-
             var dir = AppDomain.CurrentDomain.BaseDirectory;
 
             var inputSettings = SettingsCollection.ForInput(new StartAt(1d));
@@ -53,14 +57,37 @@ namespace GifCreator.ViewModels
 
             var settings = SettingsCollection.ForOutput(new OverwriteOutput());
 
+            //Microsoft.Win32.SaveFileDialog dialog = new Microsoft.Win32.SaveFileDialog();
+            //dialog.Title = "生成Gif";
+            //dialog.DefaultExt = ".gif";
+            //dialog.Filter = "gif|*.gif";
+            //dialog.FileName = Path.GetFileNameWithoutExtension(VideoSource);
 
-            var factory = CommandFactory.Create();
+            var fileName = Path.Combine(Path.GetDirectoryName(VideoSource), Path.GetFileNameWithoutExtension(VideoSource) + ".gif");
 
-            factory.CreateOutputCommand()
-                .WithInput<VideoStream>(VideoSource)
-                .MapTo<Gif>("d:/out.gif", settings);
+            //if (dialog.ShowDialog() == true)
+            {
+                var factory = CommandFactory.Create();
 
-            factory.Render();
+                factory.CreateOutputCommand()
+                    .WithInput<VideoStream>(VideoSource)
+                    .MapTo<Gif>(fileName, settings);
+
+                factory.Render();
+
+                ModernDialog.ShowTips("完成！");
+            }
+        }
+
+        private void OpenMp4()
+        {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+
+            dialog.Filter = "mp4|*.mp4|flv|*.flv";
+            if (dialog.ShowDialog() == true)
+            {
+                VideoSource = dialog.FileName;
+            }
         }
     }
 }
