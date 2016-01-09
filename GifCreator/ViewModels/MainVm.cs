@@ -8,7 +8,6 @@ using Hudl.FFmpeg.Sugar;
 using System;
 using System.IO;
 using System.Windows.Input;
-using WpfInfras.Controls;
 using WpfInfras.Presentation;
 
 namespace GifCreator.ViewModels
@@ -48,6 +47,13 @@ namespace GifCreator.ViewModels
 
         private void Convert2Gif()
         {
+
+            if (VideoSource == null)
+            {
+                SelfWindow?.Notify("请选择视频文件！");
+                return;
+            }
+
             var dir = AppDomain.CurrentDomain.BaseDirectory;
 
             var inputSettings = SettingsCollection.ForInput(new StartAt(1d));
@@ -75,7 +81,8 @@ namespace GifCreator.ViewModels
 
                 factory.Render();
 
-                ModernDialog.ShowTips("完成！");
+                SelfWindow?.Notify("完成！");
+                //ModernDialog.ShowTips("完成！");
             }
         }
 
