@@ -29,6 +29,11 @@ namespace GifCreator.ViewModels
 
             ConvertCommand = new RelayCommand(Convert2Gif);
             OpenMp4Command = new RelayCommand(OpenMp4);
+            
+            if(!Directory.Exists("temp"))
+            {
+                Directory.CreateDirectory("temp");
+            }
         }
 
 
