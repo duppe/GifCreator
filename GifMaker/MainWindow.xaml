@@ -1,0 +1,96 @@
+﻿<controls:MetroWindow x:Class="GifMaker.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:ffme="clr-namespace:Unosquare.FFmpegMediaElement;assembly=Unosquare.FFmpegMediaElement"
+                      Title="Gif Maker" Height="600" Width="800" 
+                      Loaded="MainWindow_OnLoaded" Closing="MainWindow_OnClosing" AllowDrop="True">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" LastChildFill="True">
+            <Label DockPanel.Dock="Left">Source</Label>
+            <Button x:Name="OpenButton" DockPanel.Dock="Right" Click="OpenButton_Click">Open</Button>
+            <TextBox DockPanel.Dock="Left" x:Name="SourceText" Text="{Binding ElementName=FFmePlayer, Path=Source, Mode=OneWay}"></TextBox>
+        </DockPanel>
+        <ffme:MediaElement Grid.Row="1" Margin="0,0,-10,0" x:Name="FFmePlayer" Background="Gray" 
+                           LoadedBehavior="Play" UnloadedBehavior="Manual" AllowDrop="True" 
+                      DragEnter="FFmePlayer_DragEnter" DragLeave="FFmePlayer_DragLeave" 
+                      DragOver="FFmePlayer_DragOver" Drop="FFmePlayer_Drop"   
+                           MouseDown="FFmePlayer_OnMouseDown"
+                           ></ffme:MediaElement>
+
+        <StackPanel Grid.Row="2">
+            <DockPanel LastChildFill="True">
+
+                <Label Content="{Binding ElementName=FFmePlayer, Path=Position}" Width="100"></Label>
+                <Button x:Name="MoreButton" Width="100" Content="..."  controls:ButtonHelper.PreserveTextCase="True"
+                        DockPanel.Dock="Right" Click="MoreButton_OnClick"></Button>
+                <Slider VerticalAlignment="Center" Value="{Binding ElementName=FFmePlayer, Path=Position}"
+                        Minimum="0" Maximum="{Binding ElementName=FFmePlayer, Path=NaturalDuration}" TickFrequency="0.02" 
+                        IsMoveToPointEnabled="True" IsSnapToTickEnabled="True" SmallChange="0.03" LargeChange="1" TickPlacement="None"/>
+            </DockPanel>
+
+<!--            <DockPanel LastChildFill="True">-->
+<!--                <Label>Volume:</Label>-->
+<!--                <CheckBox IsChecked="{Binding ElementName=FFmePlayer, Path=IsMuted}" VerticalAlignment="Center" />-->
+<!--                <Label>Mute</Label>-->
+<!--                <Slider VerticalAlignment="Center" Minimum="0" Maximum="1" Value="{Binding ElementName=FFmePlayer, Path=Volume}" />-->
+<!--            </DockPanel>-->
+<!---->
+<!--            <DockPanel LastChildFill="True">-->
+<!--                <Label>Speed Ratio:</Label>-->
+<!--                <Label Content="{Binding ElementName=FFmePlayer, Path=SpeedRatio}" Width="100"></Label>-->
+<!--                <Slider VerticalAlignment="Center" Value="{Binding ElementName=FFmePlayer, Path=SpeedRatio}" -->
+<!--                        Minimum="0" Maximum="4" SmallChange="0.25" LargeChange="1" IsSnapToTickEnabled="True" TickFrequency="0.25" TickPlacement="Both"></Slider>-->
+<!--            </DockPanel>-->
+<!---->
+<!--            <DockPanel LastChildFill="True">-->
+<!--                <Label>Synchronous Scrubbing Enabled:</Label>-->
+<!--                <CheckBox IsChecked="{Binding ElementName=FFmePlayer, Path=ScrubbingEnabled}" VerticalAlignment="Center" />-->
+<!--            </DockPanel>-->
+        </StackPanel>
+    </Grid>
+    <controls:MetroWindow.Flyouts >
+        <controls:FlyoutsControl>
+            <controls:Flyout x:Name="SettingsFlyout" Theme="Accent"  IsPinned="False"
+                             Width="500"
+                             Header="Settings"
+                             Position="Right" FocusableChanged="SettingsFlyout_FocusableChanged">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"></ColumnDefinition>
+                        <ColumnDefinition ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Size:" VerticalAlignment="Center"></TextBlock>
+                    <ComboBox x:Name="SizeComboBox"  Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" SelectedIndex="4">
+                        <ComboBox.Items>
+                            <ComboBoxItem Content="Original"></ComboBoxItem>
+                            <ComboBoxItem Content="600xAuto"></ComboBoxItem>
+                            <ComboBoxItem Content="500xAuto"></ComboBoxItem>
+                            <ComboBoxItem Content="480xAuto"></ComboBoxItem>
+                            <ComboBoxItem Content="320xAuto"></ComboBoxItem>
+                            <ComboBoxItem Content="Autox480"></ComboBoxItem>
+                            <ComboBoxItem Content="Autox320"></ComboBoxItem>
+                        </ComboBox.Items>
+                    </ComboBox>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Frame rate (FPS):" VerticalAlignment="Center"></TextBlock>
+                    <TextBox x:Name="FrameRateTextBox"  Text="10" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBox>
+
+                    <Button x:Name="MakeButton" Width="100" Grid.Row="6" Grid.Column="1" Content="Make" VerticalAlignment="Center" HorizontalAlignment="Right" Click="MakeButton_OnClick"></Button>
+                </Grid>
+            </controls:Flyout>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>
+</controls:MetroWindow>
